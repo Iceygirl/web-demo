@@ -18,7 +18,7 @@ const createLintingRule = () => ({
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 })
-
+ 
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
@@ -31,11 +31,15 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
-  resolve: {
+  resolve: { 
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       'components': resolve('src/components'),
+      'api': resolve('src/api'),
+      'style': resolve('src/assets/style'),
+      'js': resolve('src/assets/js'),
+      'img': resolve('src/assets/img')
     }
   },
   module: {
@@ -74,7 +78,8 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
+       
     ]
   },
   node: {

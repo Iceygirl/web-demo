@@ -3,18 +3,24 @@
 
  /* 项目入口文件
     @ 周小曼
-    @ 2018-10/17
+    @ 2018-10-17
  */
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-Vue.config.productionTip = false
+import 'style/base.scss'
 
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
+
+Vue.use(iView)
+Vue.config.productionTip = false
+ 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>' 
 })
