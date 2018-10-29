@@ -18,7 +18,7 @@ import TotalReport from 'components/DataStatistics/TotalReport'
 import UseHelp from 'components/UseHelp'
 
  
-Vue.use(Router)
+Vue.use(Router) 
  
 export default new Router({
   routes: [
