@@ -17,7 +17,7 @@
           
           <FormItem prop="checkCode">
               <Input type="text" v-model="formLogin.checkCode" placeholder="请输入验证码" style="width:50%;" :maxlength="4" @on-enter="_toLogin"></Input>
-              <img class="codeImg" :src="imgCodeUrl" alt="">
+              <img class="codeImg" :src="imgCodeUrl" alt="" @click="_getCode">
           </FormItem>
           <FormItem>
               <Button class="loginBtn" type="primary" @click="_toLogin">登录</Button>

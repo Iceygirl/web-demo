@@ -1,6 +1,10 @@
 <template>
   <div class="Home">
-    首页
+    <div class="HomeHeader"></div>
+    <div class="HomeMain">
+      <div class="HomeSideNav"></div>
+      <div class="HomeMain"></div>
+    </div>
   </div>
 </template>
 
@@ -13,6 +17,11 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.HomeHeader {
+  width:100%;
+  height:50px;
+  line-height:50px;
+  background-color:#CAF2FE;
+}
 </style>
