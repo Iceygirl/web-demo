@@ -1,20 +1,26 @@
 <template>
   <div class="Home">
-    <div class="HomeHeader"></div>
+    <div class="HomeHeader">
+       <head-page></head-page>
+    </div>
     <div class="HomeMain">
       <div class="HomeSideNav"></div>
       <div class="HomeMain"></div>
     </div>
   </div>
 </template>
-
+ 
 <script>
+import Header from 'public/Header'
 export default {
   data () {
     return {
     }
+  },
+  components: {
+    'head-page': Header
   }
-}
+} 
 </script>
 
 <style lang="scss" scoped>

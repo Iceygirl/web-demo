@@ -2,7 +2,8 @@
 
 import axios from 'axios'
 import { httpURL } from './config'
-// import { getLocalStorage } from 'js/dom'
+import { getLocalStorage } from 'js/dom'
+
 export function ajaxLogin(url, data) {
   url = `${httpURL}${url}`
   return axios({
@@ -14,18 +15,18 @@ export function ajaxLogin(url, data) {
       return Promise.resolve(res.data)
     }) 
 }
-// export function ajaxPost(url, data) {
-//   url = `${httpURL}${url}`
-//   return axios({
-//       method: 'post',
-//       url: url,
-//       params: {
-//         token: getLocalStorage('userinfo') ? getLocalStorage('userinfo').token : ''
-//       },
-//       data
-//     })
-//     .then((res) => {
-//       let data = res.data;
-//       return Promise.resolve(data)
-//     })
-// }
+export function ajaxPost(url, data) {
+  url = `${httpURL}${url}`
+  return axios({
+      method: 'post',
+      url: url,
+      params: {
+        token: getLocalStorage('userinfo') ? getLocalStorage('userinfo').token : ''
+      },
+      data
+    })
+    .then((res) => {
+      let data = res.data;
+      return Promise.resolve(data)
+    })
+}
