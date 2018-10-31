@@ -4,7 +4,7 @@
        <head-page></head-page>
     </div>
     <div class="HomeMain">
-      <div class="HomeSideNav"></div>
+      <left-nav></left-nav>
       <div class="HomeMain"></div>
     </div>
   </div>
@@ -12,13 +12,15 @@
  
 <script>
 import Header from 'public/Header'
+import SideNav from 'public/SideNav'
 export default {
   data () {
     return {
     }
   },
   components: {
-    'head-page': Header
+    'head-page': Header,
+    'left-nav': SideNav
   }
 } 
 </script>

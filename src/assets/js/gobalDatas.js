@@ -1,0 +1,46 @@
+// 全局的数据
+
+export const navDatas = [{
+  name:'main',
+  title:'主页',
+  link:'/home/main',
+  icon:'icon-tianchongxing-'
+},{
+  name:'areaManage',
+  title:'辖区管理',
+  link:'/home/areaManage',
+  icon:'icon-lvzhou_fenzhichangsuo'
+},{
+  name:'patrolmanManage',
+  title:'巡查员管理', 
+  link:'/home/patrolmanManage',
+  icon:'icon-guanlikehu'
+},{
+  name:'siteManage',
+  title:'场所管理',
+  link:'/home/siteManage',
+  icon:'icon-jianzhu'
+},{
+  name:'schedule',
+  title:'巡查进度',
+  link:'/home/schedule',
+  icon:'icon-jindu'
+},{
+  name:'dataStatistics',
+  title:'数据统计',
+  icon:'icon-tongji',
+  children:[{
+    name:'dialyReport',
+    title:'日结报表下载',
+    link:'/home/dialyReport'
+  },{
+    name:'totalReport',
+    title:'累计排查统计',
+    link:'/home/totalReport'
+  }]
+},{
+  name:'useHelp',
+  title:'使用帮助',
+  link:'/home/useHelp',
+  icon:'icon-gerenzhongxin-shiyongbangzhu'
+},]
