@@ -12,5 +12,5 @@ export function getLocalStorage(name, val) {
   
 //删除本地存储
 export function removeLocalStorage(name) {
-return storage.remove(name);
+  return storage.remove(name);
 }

@@ -11,8 +11,10 @@ import router from './router'
 
 import 'style/base.scss'
 
-import iView from 'iview';
-import 'iview/dist/styles/iview.css';
+import iView from 'iview'
+import 'iview/dist/styles/iview.css'
+
+import 'iconfont/iconfont.css'
 
 Vue.use(iView)
 Vue.config.productionTip = false

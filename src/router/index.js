@@ -10,6 +10,8 @@ import AreaManage from 'components/Manage/AreaManage'
 import PatrolmanManage from 'components/Manage/PatrolmanManage'
 // 场所管理
 import SiteManage from 'components/Manage/SiteManage'
+// 巡查进度
+import Schedule from 'components/Patrol/Schedule'
 // 日结报表下载
 import DialyReport from 'components/DataStatistics/DialyReport'
 // 累计排查统计
@@ -24,6 +26,11 @@ export default new Router({
   routes: [
     { 
       path: '/',
+      name: 'login',
+      component: Login
+    },
+    { 
+      path: '/login',
       name: 'login',
       component: Login
     },
@@ -47,6 +54,10 @@ export default new Router({
           path:'/home/siteManage', 
           name:'siteManage',
           component:SiteManage
+        },{
+          path:'/home/schedule', 
+          name:'schedule',
+          component:Schedule
         },{
           path:'/home/dialyReport',
           name:'dialyReport',

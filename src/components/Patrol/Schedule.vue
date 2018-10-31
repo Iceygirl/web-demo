@@ -1,6 +1,6 @@
 <template>
-  <div class="Head">
-    主页头部
+  <div class="Schedule">
+    巡查进度
   </div>
 </template>
 
