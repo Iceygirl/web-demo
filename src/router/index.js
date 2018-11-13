@@ -17,6 +17,10 @@ import PatrolmanManage from 'components/Manage/PatrolmanManage'
 import SiteManage from 'components/Manage/SiteManage'
 // 巡查进度
 import Schedule from 'components/Patrol/Schedule'
+// 巡查详情
+import ScheduleInfo from 'components/Patrol/ScheduleInfo'
+// 修改记录
+import EditSchedule from 'components/Patrol/EditSchedule'
 // 日结报表下载
 import DialyReport from 'components/DataStatistics/DialyReport'
 // 累计排查统计
@@ -63,6 +67,14 @@ const router =  new Router({
           path:'/home/schedule', 
           name:'schedule',
           component:Schedule
+        },{
+          path:'/home/scheduleInfo', 
+          name:'scheduleInfo',
+          component:ScheduleInfo
+        },{
+          path:'/home/editSchedule', 
+          name:'editSchedule',
+          component:EditSchedule
         },{
           path:'/home/dialyReport',
           name:'dialyReport',

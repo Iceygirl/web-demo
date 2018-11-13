@@ -1,5 +1,5 @@
 <template>
-    <Menu mode="vertical" theme="light" accordion active-name="1">
+    <Menu mode="vertical" theme="light" accordion :active-name="routerName">
         <template  v-for="item in navs">
           <Menu-item  v-if="!item.children" :name="item.name" :key="item.name" @click.native="jumpTo(item.link,item.name)">
               <i class="iconfont" :class="item.icon" />

@@ -39,7 +39,78 @@ export const navDatas = [{
     link:'/home/totalReport'
   }]
 },{
-  name:'useHelp',
+  name:'useHelp', 
+  title:'使用帮助',
+  link:'/home/useHelp',
+  icon:'icon-gerenzhongxin-shiyongbangzhu'
+},]
+
+ 
+export const breadNavs = [{
+  name:'main',
+  title:'主页',
+  link:'/home/main',
+  icon:'icon-tianchongxing-'
+},{
+  name:'areaManage',
+  title:'辖区管理',
+  link:'/home/areaManage',
+  icon:'icon-lvzhou_fenzhichangsuo'
+},{
+  name:'patrolmanManage',
+  title:'巡查员管理', 
+  link:'/home/patrolmanManage',
+  icon:'icon-guanlikehu'
+},{
+  name:'siteManage',
+  title:'场所管理',
+  link:'/home/siteManage',
+  icon:'icon-jianzhu'
+},{
+  name:'schedule',
+  title:'巡查进度',
+  link:'/home/schedule',
+  icon:'icon-jindu'
+},{
+  name:'scheduleInfo', 
+  title:'巡查详情',
+  isLink:true,
+  parentTit:'巡查进度',
+  parentUrl:'/home/schedule',
+  parentIcon:'icon-jindu',
+  link:'/home/scheduleInfo',
+  icon:'icon-jindu'
+},{
+  name:'editSchedule', 
+  title:'修改记录',
+  isLink:true,
+  parentTit:'巡查进度',
+  parentUrl:'/home/schedule',
+  parentIcon:'icon-jindu',
+  link:'/home/editSchedule',
+  icon:'icon-jindu'
+},{ 
+  name:'dataStatistics',
+  title:'数据统计',
+  icon:'icon-tongji'
+},{
+  name:'dialyReport',
+  isLink:false,
+  parentTit:'数据统计',
+  parentIcon:'icon-tongji',
+  title:'日结报表下载',
+  link:'/home/dialyReport',
+  icon:'icon-04'
+},{
+  name:'totalReport',
+  isLink:false,
+  parentTit:'数据统计',
+  parentIcon:'icon-tongji',
+  title:'累计排查统计',
+  link:'/home/totalReport',
+  icon:'icon-rank_and_window'
+},{
+  name:'useHelp', 
   title:'使用帮助',
   link:'/home/useHelp',
   icon:'icon-gerenzhongxin-shiyongbangzhu'

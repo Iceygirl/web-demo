@@ -7,7 +7,7 @@
       <div class="leftNav fl">
         <left-nav></left-nav>
       </div>
-      <div class="breadNav fl">
+      <div class="content fl">
         <bread-crumbs></bread-crumbs>
         <router-view></router-view>
       </div>
@@ -50,6 +50,11 @@ export default {
     .ivu-menu {
       width:100% !important;
       height:100% !important;
+    }
+    .content {
+      width:calc(100% - 200px);
+      height:100%;
+      padding:20px;
     }
   }
 }
