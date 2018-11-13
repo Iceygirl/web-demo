@@ -1,6 +1,6 @@
 <template>
   <div class="Bread">
-    面包屑
+    
   </div>
 </template>
 
