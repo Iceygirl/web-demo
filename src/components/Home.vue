@@ -9,6 +9,7 @@
       </div>
       <div class="breadNav fl">
         <bread-crumbs></bread-crumbs>
+        <router-view></router-view>
       </div>
     </div>
   </div>

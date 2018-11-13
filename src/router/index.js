@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '..//store'
+
+
+// 登录
 import Login from 'components/Login'
+// 首页
 import Home from 'components/Home'
 // 主页
 import Main from 'components/Main'
@@ -22,7 +27,7 @@ import UseHelp from 'components/UseHelp'
  
 Vue.use(Router) 
  
-export default new Router({
+const router =  new Router({
   routes: [
     { 
       path: '/',
@@ -74,3 +79,11 @@ export default new Router({
     },
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+  store.commit('set_routerName', to.name)
+  next()
+})
+
+export default router
