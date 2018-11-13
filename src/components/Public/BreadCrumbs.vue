@@ -9,9 +9,9 @@
             <i class="iconfont" :class="routerInfo.secondIcon"></i> 
             {{routerInfo.secondTit}}
         </BreadcrumbItem>
-        <BreadcrumbItem :to="routerInfo.childLink"  v-if="!routerInfo.isHome">
-            <i class="iconfont" :class="routerInfo.childIcon"></i> 
-            {{routerInfo.childTit}}
+        <BreadcrumbItem :to="routerInfo.endLink"  v-if="!routerInfo.isHome">
+            <i class="iconfont" :class="routerInfo.endIcon"></i> 
+            {{routerInfo.endTit}}
         </BreadcrumbItem>
     </Breadcrumb>
   </div>
@@ -24,13 +24,13 @@ export default {
   computed: {
     ...mapState(['routerName']),
     routerInfo() {
-      let childTit = '', childLink = '', childIcon = '', secondTit = '',secondUrl = '',secondIcon = '', isHome = false, secondLink = false
+      let endTit = '', endLink = '', endIcon = '', secondTit = '',secondUrl = '',secondIcon = '', isHome = false, secondLink = false
       isHome = this.routerName === 'main' ? true : false 
       breadNavs.forEach(item => { 
         if(item.name === this.routerName) {
-            childTit = item.title
-            childLink = item.link
-            childIcon = item.icon
+            endTit = item.title
+            endLink = item.link
+            endIcon = item.icon
             // 有中间的第二层存在
             if(item.isLink !== undefined) {
               secondLink = true
@@ -45,7 +45,7 @@ export default {
             }
         }
       })
-      return { childTit, childTit, childIcon, isHome, secondLink, secondUrl, secondTit, secondIcon}
+      return { endTit, endLink, endIcon, isHome, secondLink, secondUrl, secondTit, secondIcon}
     }
   },
   data () {
@@ -56,7 +56,5 @@ export default {
 </script>
 
 <style scoped>
-.bread {
-  
-}
+
 </style> 
