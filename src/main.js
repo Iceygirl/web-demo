@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 
 import 'style/base.scss'
 
@@ -17,12 +18,14 @@ import 'iview/dist/styles/iview.css'
 import 'iconfont/iconfont.css'
 
 Vue.use(iView)
+Vue.use(store)
 Vue.config.productionTip = false
  
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>' 
 })

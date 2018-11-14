@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '..//store'
+
+
+// 登录
 import Login from 'components/Login'
+// 首页
 import Home from 'components/Home'
 // 主页
 import Main from 'components/Main'
@@ -12,6 +17,10 @@ import PatrolmanManage from 'components/Manage/PatrolmanManage'
 import SiteManage from 'components/Manage/SiteManage'
 // 巡查进度
 import Schedule from 'components/Patrol/Schedule'
+// 巡查详情
+import ScheduleInfo from 'components/Patrol/ScheduleInfo'
+// 修改记录
+import EditSchedule from 'components/Patrol/EditSchedule'
 // 日结报表下载
 import DialyReport from 'components/DataStatistics/DialyReport'
 // 累计排查统计
@@ -22,7 +31,7 @@ import UseHelp from 'components/UseHelp'
  
 Vue.use(Router) 
  
-export default new Router({
+const router =  new Router({
   routes: [
     { 
       path: '/',
@@ -59,6 +68,14 @@ export default new Router({
           name:'schedule',
           component:Schedule
         },{
+          path:'/home/scheduleInfo', 
+          name:'scheduleInfo',
+          component:ScheduleInfo
+        },{
+          path:'/home/editSchedule', 
+          name:'editSchedule',
+          component:EditSchedule
+        },{
           path:'/home/dialyReport',
           name:'dialyReport',
           component:DialyReport
@@ -74,3 +91,11 @@ export default new Router({
     },
   ]
 })
+
+
+router.beforeEach((to, from, next) => {
+  store.commit('set_routerName', to.name)
+  next()
+})
+
+export default router
