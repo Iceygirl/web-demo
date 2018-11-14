@@ -1,5 +1,6 @@
 // 全局的数据
 
+// 首页左侧nav的数据
 export const navDatas = [{
   name:'main',
   title:'主页',
@@ -45,7 +46,8 @@ export const navDatas = [{
   icon:'icon-gerenzhongxin-shiyongbangzhu'
 },]
 
- 
+
+// 面包屑数据
 export const breadNavs = [{
   name:'main',
   title:'主页',
@@ -115,3 +117,19 @@ export const breadNavs = [{
   link:'/home/useHelp',
   icon:'icon-gerenzhongxin-shiyongbangzhu'
 },]
+
+
+// 管理处下拉数据
+export const subAreaDatas = [{
+  value:'官窑管理处',
+  label:'官窑管理处'
+},{
+  value:'小塘管理处',
+  label:'小塘管理处'
+},{
+  value:'罗村管理处',
+  label:'罗村管理处'
+},{
+  value:'大圃管理处',
+  label:'大圃管理处'
+}]
