@@ -183,6 +183,7 @@ export default {
             this.$Notice.warning({
               title: res.message
             }) 
+            backToLogin(res.code)
           }
         }) 
     } 

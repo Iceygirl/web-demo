@@ -29,3 +29,11 @@ export function editPsw(data) {
   return ajaxPost(url,data)
 }
 
+// 获取村居列表
+export function getiNameList(data) {
+  let url = '/sszhxf-web/iName/list'
+  return ajaxPost(url,data)
+}
+
+
+
