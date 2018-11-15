@@ -1,6 +1,7 @@
 // 公用的方法
 
 import { removeLocalStorage } from './dom'
+
 // 深拷贝一个Object
 export function cloneObj(obj) {
   if (null == obj || "object" != typeof obj) return obj;
@@ -69,7 +70,8 @@ export function backToLogin(code) {
     removeLocalStorage('userinfo')
     setTimeout(() => {
       window.location.href = location.pathname;
-    }, 500);
+      // this.$router.push('/login')
+    }, 500); 
   }
 }
 

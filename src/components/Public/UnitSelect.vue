@@ -1,9 +1,15 @@
 <template>
-  <div class="Select">
-    <Select v-model="unit.subArea" class="selectItem" @keyup.enter.native="search">
-        <Option v-for="item in subAreaData" :value="item.value" :key="item.value" clearable>{{ item.label }}</Option>
-    </Select>
-    <Button type="primary" @click="search">搜索</Button>
+  <div class="Select clearfix">
+    <div class="fl">
+      <Select v-model="unit.subArea" class="selectItem" @keyup.enter.native="search">
+          <Option v-for="item in subAreaData" :value="item.value" :key="item.value" clearable>{{ item.label }}</Option>
+      </Select>
+      <Button type="primary" @click="search">搜索</Button>
+    </div>
+    <div class="fr">
+      <Button type="primary">导出列表</Button>
+      <Button type="primary">导出勾选的内容</Button>
+    </div>
   </div>
 </template>
 
@@ -16,11 +22,11 @@ export default {
       unit: {
         subArea: ''
       }
-    }
+    }  
   },
-  methods: {
+  methods: { 
     search() {
-      console.log(11)
+      this.$emit('search',this.unit)
     }
   }
 }
