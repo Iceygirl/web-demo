@@ -3,7 +3,7 @@
     <unit-select @search="search"></unit-select>
     <div class="table">
       <Table width="100%" :columns="areaThead" :data="areaData" stripe border></Table>
-      <Page class="page" :total="total" :current="current" :page-size="15" @on-change="pageChange" />
+      <Page class="page" :total="total" :current="current" :page-size="15" showTotal @on-change="pageChange" />
     </div>
   </div>
 </template> 
@@ -21,7 +21,7 @@ export default {
     'unit-select':UnitSelect
   },
   data () {
-    return {
+    return { 
       total:0,
       current:1,
       areaData:[],
@@ -54,6 +54,7 @@ export default {
   methods: {
     // 获取村居列表
     _getiNameList(page,searchValue) {
+      pages.page = page !== undefined ? page : 1
       let data = {
         ...pages,
         searchValue: {
@@ -68,7 +69,7 @@ export default {
             let arr = []
             data.list.map((dataItem,index) => {
               arr.push({
-                index: index + 1,
+                index: pages.pageSize*(this.current-1) + index + 1,
                 subArea: dataItem.subArea,
                 iName:dataItem.iName,
                 address:dataItem.address,
