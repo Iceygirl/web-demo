@@ -9,5 +9,5 @@ export const ERR_OK = '0000'
 // 分页
 export const pages = {
     page:1,
-    pageSize:10
+    pageSize:15
 }
