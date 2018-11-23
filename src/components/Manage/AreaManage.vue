@@ -6,7 +6,7 @@
       <Page class="page" :total="total" :current="current" :page-size="15" showTotal @on-change="pageChange" />
     </div> 
     <Modal class="modal" v-model="showModal" title="修改村居信息" width="600" @on-cancel="close">
-      <Form class="form" ref="formEdit" :model="formEdit" :rules="rulesEditIname">
+      <Form class="form" ref="formEdit" :model="formEdit" :rules="rulesEdit">
         <FormItem class="formitem" label="所属管理处"> 
             <Input type="text" class="editInput" :value="formEdit.subArea" disabled>
             </Input>
@@ -16,21 +16,21 @@
             </Input>
         </FormItem> 
         <FormItem class="formitem" prop="manager" label="管理员"> 
-            <Input type="text" class="editInput" :value="formEdit.manager">
+            <Input type="text" class="editInput" v-model="formEdit.manager">
             </Input>
         </FormItem>
         <FormItem class="formitem" prop="address" label="地址"> 
-            <Input type="text" class="editInput" :value="formEdit.address">
+            <Input type="text" class="editInput" v-model="formEdit.address">
             </Input>
         </FormItem>
         <FormItem class="formitem" prop="phone" label="联系电话"> 
-            <Input type="text" class="editInput" :value="formEdit.phone">
+            <Input type="text" class="editInput" v-model="formEdit.phone">
             </Input>
         </FormItem>
       </Form>
       <div slot="footer">
         <Button type="primary" @click="eidtSave" :disabled="isClickEdit">{{isClickEdit ? '修改中...' : '保存' }}</Button>
-        <Button>取消</Button>
+        <Button @click="close">取消</Button>
       </div>
     </Modal>
   </div>
@@ -43,7 +43,8 @@ import { areaTheads } from 'js/tableThead'
 import { getiNameList, editiName } from 'api/port' 
 import { pages, ERR_OK } from 'api/config' 
 import { backToLogin, cloneObj } from 'js/util' 
-
+import { rulesEditIname } from 'js/formRules' 
+ 
 export default {
   components: {
     'unit-select':UnitSelect
@@ -66,7 +67,7 @@ export default {
         address:'',
         phone:''
       },
-      rulesEditIname:{},
+      rulesEdit:rulesEditIname,
       theads:[{
         title: '操作',
         fixed: 'right', 
@@ -153,7 +154,9 @@ export default {
     },
     // 关闭
     close() {
-      this.showModal = false
+      this.showModal = false 
+      // 重置表单
+      this.$refs.formEdit.resetFields()
     },
     // 打开修改弹框
     edit(item) {
@@ -162,22 +165,34 @@ export default {
     },
     // 修改保存
     eidtSave() {
-      this.isClickEdit = true
-      let data = {
-        _id: this.formEdit._id,
-        phone:this.formEdit.phone,
-        manager:this.formEdit.manager,
-        address:this.formEdit.address
-      }
-      editiName(data)
-        .then(res => {
-          this.isClickEdit = false
-          this.showModal = false
-          this.$Message.info(res.message)
-          this._getiNameList(this.current)
-        })
+      this.$refs.formEdit.validate(valid => {
+        if(valid) {
+          this.isClickEdit = true
+          let data = {
+            _id: this.formEdit._id,
+            phone:this.formEdit.phone,
+            manager:this.formEdit.manager,
+            address:this.formEdit.address
+          }
+          editiName(data)
+            .then(res => {
+              if(res.code === ERR_OK) {
+                this.isClickEdit = false
+                this.showModal = false
+                this.$Message.info('修改成功')
+                this._getiNameList(this.current)
+              } else {
+                this.$Notice.warning({
+                  title:res.message
+                })
+                backToLogin(res.code)
+              }
+            })
+        }
+      })
+      
     }
-  }
+  } 
 }
 </script>
 
