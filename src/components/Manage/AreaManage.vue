@@ -2,9 +2,37 @@
   <div class="AreaManage">
     <unit-select @search="search"></unit-select>
     <div class="table">
-      <Table width="100%" :columns="areaThead" :data="areaData" stripe border></Table>
+      <Table width="100%" :columns="theads" :data="areaData" stripe border></Table>
       <Page class="page" :total="total" :current="current" :page-size="15" showTotal @on-change="pageChange" />
-    </div>
+    </div> 
+    <Modal class="modal" v-model="showModal" title="修改村居信息" width="600" @on-cancel="close">
+      <Form class="form" ref="formEdit" :model="formEdit" :rules="rulesEditIname">
+        <FormItem class="formitem" label="所属管理处"> 
+            <Input type="text" class="editInput" :value="formEdit.subArea" disabled>
+            </Input>
+        </FormItem>  
+        <FormItem class="formitem" label="名称"> 
+            <Input type="text" class="editInput" :value="formEdit.iName" disabled>
+            </Input>
+        </FormItem> 
+        <FormItem class="formitem" prop="manager" label="管理员"> 
+            <Input type="text" class="editInput" :value="formEdit.manager">
+            </Input>
+        </FormItem>
+        <FormItem class="formitem" prop="address" label="地址"> 
+            <Input type="text" class="editInput" :value="formEdit.address">
+            </Input>
+        </FormItem>
+        <FormItem class="formitem" prop="phone" label="联系电话"> 
+            <Input type="text" class="editInput" :value="formEdit.phone">
+            </Input>
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <Button type="primary" @click="eidtSave" :disabled="isClickEdit">{{isClickEdit ? '修改中...' : '保存' }}</Button>
+        <Button>取消</Button>
+      </div>
+    </Modal>
   </div>
 </template> 
 
@@ -12,9 +40,9 @@
 
 import UnitSelect from 'public/UnitSelect' 
 import { areaTheads } from 'js/tableThead' 
-import { getiNameList } from 'api/port' 
+import { getiNameList, editiName } from 'api/port' 
 import { pages, ERR_OK } from 'api/config' 
-import { backToLogin } from 'js/util' 
+import { backToLogin, cloneObj } from 'js/util' 
 
 export default {
   components: {
@@ -25,10 +53,23 @@ export default {
       total:0,
       current:1,
       areaData:[],
+      showModal:false,
+      isClickEdit:false,
       areaThead:areaTheads,
-      lastThead: {
+      searchValue: {
+        subArea:""
+      },
+      formEdit:{
+        subArea:'',
+        iName:'',
+        manager:'',
+        address:'',
+        phone:''
+      },
+      rulesEditIname:{},
+      theads:[{
         title: '操作',
-        fixed: 'right',
+        fixed: 'right', 
         width: 120,
         render: (h, params) => {
             return h('div', [
@@ -36,29 +77,40 @@ export default {
                     props: {
                         type: 'primary',
                         size: 'small'
+                    },
+                    on: {
+                      click:() => {
+                        this.edit(params.row)
+                      }
                     }
                   },
                 '修改'
               )
             ])
         }
-    }
+      }] 
     }
   },
   created() {
-    this.areaThead.push(this.lastThead)
+    this.getTheads()
   },
   mounted() {
     this._getiNameList(1)
   },
   methods: {
+    // 获取表头
+    getTheads() {
+      areaTheads.map(item => {
+        this.theads.push(item)
+      })
+    },  
     // 获取村居列表
-    _getiNameList(page,searchValue) {
+    _getiNameList(page) {
       pages.page = page !== undefined ? page : 1
       let data = {
         ...pages,
         searchValue: {
-          subArea:""
+          subArea: this.searchValue.subArea
         }
       }
 
@@ -73,7 +125,9 @@ export default {
                 subArea: dataItem.subArea,
                 iName:dataItem.iName,
                 address:dataItem.address,
-                phone:dataItem.phone 
+                phone:dataItem.phone,
+                _id:dataItem._id,
+                manager:dataItem.manager
               })
             })  
             this.areaData = arr
@@ -93,7 +147,35 @@ export default {
     },
     // 搜索
     search(datas) {
-      console.log(datas)
+      this.searchValue.subArea = datas.subArea !== undefined ? datas.subArea : ''
+      this.current = 1
+      this._getiNameList(1)
+    },
+    // 关闭
+    close() {
+      this.showModal = false
+    },
+    // 打开修改弹框
+    edit(item) {
+      this.showModal = true
+      this.formEdit = cloneObj(item)
+    },
+    // 修改保存
+    eidtSave() {
+      this.isClickEdit = true
+      let data = {
+        _id: this.formEdit._id,
+        phone:this.formEdit.phone,
+        manager:this.formEdit.manager,
+        address:this.formEdit.address
+      }
+      editiName(data)
+        .then(res => {
+          this.isClickEdit = false
+          this.showModal = false
+          this.$Message.info(res.message)
+          this._getiNameList(this.current)
+        })
     }
   }
 }

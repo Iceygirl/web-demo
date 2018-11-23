@@ -35,5 +35,9 @@ export function getiNameList(data) {
   return ajaxPost(url,data)
 }
 
-
+// 获取村居列表
+export function editiName(data) {
+  let url = '/sszhxf-web/iName/edit'
+  return ajaxPost(url,data)
+}
 

@@ -1,8 +1,8 @@
 <template>
   <div class="Select clearfix">
     <div class="fl">
-      <Select v-model="unit.subArea" class="selectItem" @keyup.enter.native="search">
-          <Option v-for="item in subAreaData" :value="item.value" :key="item.value" clearable>{{ item.label }}</Option>
+      <Select v-model="unit.subArea" class="selectItem" @keyup.enter.native="search" clearable>
+          <Option v-for="item in subAreaData" :value="item.value" :key="item.value">{{ item.label }}</Option>
       </Select>
       <Button type="primary" @click="search">搜索</Button>
     </div>
