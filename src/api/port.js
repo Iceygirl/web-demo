@@ -35,5 +35,16 @@ export function getiNameList(data) {
   return ajaxPost(url,data)
 }
 
+// 修改村居信息
+export function editiName(data) {
+  let url = '/sszhxf-web/iName/edit'
+  return ajaxPost(url,data)
+}
 
+
+// 获取巡查员列表
+export function getPatrolmanLists(data) {
+  let url = '/sszhxf-web/user/list'
+  return ajaxPost(url,data)
+}
 

@@ -13,6 +13,31 @@ body {
     float:right;
 }
 
+// 表单
+.formitem {
+  text-align: center !important;
+
+  .ivu-form-item-label {
+    width:100px;
+    font-size: 14px;
+    display: inline-block;
+    float: inherit !important;
+    margin-left: -30px;
+  }
+
+  .ivu-form-item-content {
+    width: 200px;
+    display: inline-block;
+    margin-left: 5px !important;
+    text-align: left;
+
+    .ivu-input {
+      border: 1px solid #c0c2c7 !important;
+     font-size:12px;
+    }
+  }
+}
+
 /* reset */
 body,
 div,

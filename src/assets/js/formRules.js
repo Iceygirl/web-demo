@@ -53,3 +53,18 @@ export const rulesEditPsw = {
     trigger: 'blur'
   }]
 }
+
+
+// 修改村居表单规则
+export const rulesEditIname = {
+  address:[{ 
+    required: true, 
+    message: '请输入地址',
+    trigger: 'blur'
+  }],
+  phone: [{ 
+    required: true, 
+    message: '请输入联系电话',
+    trigger: 'blur'
+  }]
+}

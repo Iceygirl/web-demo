@@ -10,12 +10,13 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-import 'style/base.scss'
 
 import iView from 'iview'
 import 'iview/dist/styles/iview.css'
 
 import 'iconfont/iconfont.css'
+
+import 'style/base.scss'
 
 Vue.use(iView)
 Vue.use(store)

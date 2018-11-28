@@ -11,3 +11,7 @@ export const pages = {
     page:1,
     pageSize:15
 }
+
+
+// 模糊查询拼接字符串
+export const fuzzyQueryStr = '|#|like'
