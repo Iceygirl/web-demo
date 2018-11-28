@@ -133,3 +133,16 @@ export const subAreaDatas = [{
   value:'大圃管理处',
   label:'大圃管理处'
 }]
+
+
+// 管理处下拉数据
+export const enabledDatas = [{
+  value:'全部',
+  label:'全部'
+},{
+  value:'已禁用',
+  label:'已禁用'
+},{
+  value:'未禁用',
+  label:'未禁用'
+}]

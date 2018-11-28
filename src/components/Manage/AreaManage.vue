@@ -1,6 +1,6 @@
 <template>
   <div class="AreaManage">
-    <unit-select @search="search"></unit-select>
+    <unit-select :isSubArea="true" @search="search"></unit-select>
     <div class="table">
       <Table width="100%" :columns="theads" :data="areaData" stripe border></Table>
       <Page class="page" :total="total" :current="current" :page-size="15" showTotal @on-change="pageChange" />
@@ -196,6 +196,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
