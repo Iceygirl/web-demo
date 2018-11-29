@@ -48,3 +48,8 @@ export function getPatrolmanLists(data) {
   return ajaxPost(url,data)
 }
 
+// 新增巡查员
+export function addPatrolman(data) {
+  let url = '/sszhxf-web/user2/addUser'
+  return ajaxPost(url,data)
+}

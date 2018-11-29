@@ -107,7 +107,7 @@ export default {
       data.userName = this.unit.userName !== '' ? (this.unit.userName + fuzzyQueryStr) : ''
       data.patrolmanName = this.unit.patrolmanName !== '' ? (this.unit.patrolmanName + fuzzyQueryStr) : ''
 
-      this.$emit('search',data)
+      this.$emit('search',data) 
     },
     // 新增巡查员
     addPatrolman() {
