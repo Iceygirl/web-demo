@@ -58,7 +58,7 @@ export const rulesEditPsw = {
 // 修改村居表单规则
 export const rulesEditIname = {
   address:[{ 
-    required: true, 
+    required: true,  
     message: '请输入地址',
     trigger: 'blur'
   }],
@@ -67,4 +67,39 @@ export const rulesEditIname = {
     message: '请输入联系电话',
     trigger: 'blur'
   }]
+}
+
+
+// 新增巡查员表单规则
+export const rulesAddPatrolman = {
+  userName:[{ 
+    required: true,  
+    message: '请输入账号',
+    trigger: 'blur'
+  }],
+  name: [{  
+    required: true, 
+    message: '请输入名字',
+    trigger: 'blur'
+  }],
+  phone: [{  
+    required: true, 
+    message: '请输入联系电话',
+    trigger: 'blur'
+  }],
+  idCard: [{  
+    required: true, 
+    message: '请输入身份证号',
+    trigger: 'blur'
+  }],
+  subArea: [{  
+    required: true, 
+    message: '请选择管理处',
+    trigger: 'change'
+  }],
+  iName: [{  
+    required: true, 
+    message: '请选择村居',
+    trigger: 'change'
+  }] 
 }

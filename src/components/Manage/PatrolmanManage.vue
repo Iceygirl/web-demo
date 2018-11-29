@@ -12,31 +12,31 @@
     <!-- 弹框 -->
     <Modal class="modal" ref="modal"  v-model="showModal" :name="modalName" :title="modalTit" :width="modalWidth" @on-cancel="cancel">
       <!-- 新增巡查员 -->
-      <div v-if="modalName === 'addPatrolman'">
+      <div v-if="modalName === 'addPatrolman'"> 
         <Form class="form" ref="formAdd" :model="formAdd" :rules="rulesAdd">
-          <FormItem class="formitem" props="userName" label="账号"> 
+          <FormItem class="formitem" prop="userName" label="账号"> 
               <Input type="text" v-model="formAdd.userName" placeholder="请输入账号">
-              </Input>
+              </Input>   
           </FormItem>  
-          <FormItem class="formitem" props="name" label="巡查员姓名"> 
+          <FormItem class="formitem" prop="name" label="巡查员姓名"> 
               <Input type="text" v-model="formAdd.name" placeholder="请输入姓名">
               </Input>
           </FormItem>  
-          <FormItem class="formitem" props="phone" label="联系电话"> 
+          <FormItem class="formitem" prop="phone" label="联系电话"> 
               <Input type="text" v-model="formAdd.phone" placeholder="请输入联系电话">
               </Input>
           </FormItem>  
-          <FormItem class="formitem" props="idCard" label="身份证号"> 
+          <FormItem class="formitem" prop="idCard" label="身份证号"> 
               <Input type="text" v-model="formAdd.idCard" placeholder="请输入身份证号">
               </Input>
           </FormItem>  
-          <FormItem class="formitem" props="subArea" label="所属管理处"> 
-            <Select v-model="formAdd.subArea"  placeholder="请选择管理处">
+          <FormItem class="formitem" prop="subArea" label="所属管理处"> 
+            <Select v-model="formAdd.subArea"  placeholder="请选择管理处" @on-change="_getiName">
                 <Option v-for="item in subAreaData" :value="item.value" :key="item.value">{{ item.label }}</Option>
             </Select>
           </FormItem>  
-          <FormItem class="formitem" props="iName" label="所属村居/社区"> 
-            <Select v-model="formAdd.iName"  placeholder="请选择村居/社区">
+          <FormItem class="formitem" prop="iName" label="所属村居"> 
+            <Select v-model="formAdd.iName"  placeholder="请选择村居/社区" :disabled="formAdd.subArea === ''">
                 <Option v-for="item in iNameData" :value="item.value" :key="item.value">{{ item.label }}</Option> 
             </Select>
           </FormItem>  
@@ -44,20 +44,21 @@
       </div>
 
       <div slot="footer">
-        <Button type="primary" @click="addSave">保存</Button>
+        <Button type="primary" @click="_addSave" v-if="modalName === 'addPatrolman'" :disabled="isAddSave">{{isAddSave ? '添加中...':'保存'}}</Button>
         <Button @click="cancel">取消</Button>
       </div>
     </Modal>
   </div>
 </template>
- 
+  
 <script>  
 import UnitSelect from 'public/UnitSelect' 
 import { patrolmanTheads } from 'js/tableThead'
-import { getPatrolmanLists } from 'api/port'
+import { getPatrolmanLists, addPatrolman, getiNameList } from 'api/port'
 import { pages, ERR_OK } from 'api/config'
-import { subAreaDatas } from 'js/gobalDatas'
+import { subAreaDatas } from 'js/gobalDatas' 
 import { backToLogin } from 'js/util'
+import { rulesAddPatrolman } from 'js/formRules'
 
 export default {
   components: {
@@ -75,6 +76,7 @@ export default {
       modalName:'',
       modalTit:'',
       modalWidth:500,
+      isAddSave:false,
       formAdd: {
         userName:'',
         name:'',
@@ -83,7 +85,7 @@ export default {
         subArea:'',
         iName:''
       },
-      rulesAdd: {},
+      rulesAdd: rulesAddPatrolman,
       theads:[{
         title: '操作',
         fixed: 'right', 
@@ -221,10 +223,62 @@ export default {
       this.modalName = 'addPatrolman'
       this.modalTit = '新增巡查员'
       this.modalWidth = 500
+      this._getiName()
+    },
+    // 获取村居列表
+    _getiName() { 
+      let data = {
+        ...pages,
+        searchValue:{
+          subArea: this.formAdd.subArea
+        }
+      }
+      getiNameList(data)
+        .then(res => {
+          if(res.code === ERR_OK) {
+            let dataList = res.result.list  
+            let arr = []
+            dataList.map(dataItem => {
+              arr.push({
+                value:dataItem.iName,
+                label:dataItem.iName
+              })
+            })
+            this.iNameData = arr
+          } else {
+            this.$Notice.warning({
+              title:res.message
+            })
+            backToLogin(res.code)
+          }
+        })
     },
     // 新增保存
-    addSave() {
-
+    _addSave() {
+      this.isAddSave = true
+      this.$refs.formAdd.validate(valid => {
+        if(valid) {
+          let data = {
+            role:2,
+            ...this.formAdd
+          } 
+          addPatrolman(data)
+          .then(res=> { 
+            if(res.code === ERR_OK) {
+              this.isAddSave = false
+              this.showModal = false
+              this.$Message.info(res.message)
+              this.current = 1
+              this._getPatrolmanLists(this.current)
+            } else {
+              this.$Notice.warning({
+                title:res.message
+              })
+              backToLogin(res.code)
+            }
+          })
+        }
+      })
     },
     // 打开巡查统计弹框
     addUp() {
@@ -249,7 +303,8 @@ export default {
     
     // 取消
     cancel() {
-
+      this.showModal = false
+      this.$refs.formAdd.resetFields()
     },
     // 搜索
     search(datas) {
